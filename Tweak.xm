@@ -1,8 +1,13 @@
+static BOOL isEnabled = YES;
 static BOOL cancelAnimation;
 static NSString *nowPlayingID;
-NSDictionary *bundleDefaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.popsicletreehouse.imtrynavibeprefs"];
-bool isEnabled = [[bundleDefaults objectForKey:@"isEnabled"]boolValue];
-
+static void refreshPrefs() {
+	NSDictionary *bundleDefaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.popsicletreehouse.imtrynavibeprefs"];
+	isEnabled = [[bundleDefaults objectForKey:@"isEnabled"]boolValue];
+}
+static void PreferencesChangedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    refreshPrefs();
+}
 @interface SBMainSwitcherViewController
 -(id)recentAppLayouts;
 +(id)sharedInstance;
@@ -43,3 +48,8 @@ bool isEnabled = [[bundleDefaults objectForKey:@"isEnabled"]boolValue];
 	}
 }
 %end
+
+%ctor {
+	CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback) PreferencesChangedCallback, CFSTR("com.popsicletreehouse.imtrynavibe.prefschanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+	refreshPrefs();
+}

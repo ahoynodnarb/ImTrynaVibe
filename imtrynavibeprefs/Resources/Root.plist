@@ -21,6 +21,8 @@
 			<string>isEnabled</string>
 			<key>label</key>
 			<string>Enabled</string>
+			<key>PostNotification</key>
+			<string>com.popsicletreehouse.imtrynavibe.prefschanged</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -46,6 +48,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>imtrynavibeprefs</string>
+	<string>ImTrynaVibe</string>
 </dict>
 </plist>
