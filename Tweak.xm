@@ -1,3 +1,5 @@
+#import "ImTrynaVibe.h"
+
 static BOOL isEnabled = YES;
 static BOOL cancelAnimation;
 static NSString *nowPlayingID;
@@ -8,24 +10,6 @@ static void refreshPrefs() {
 static void PreferencesChangedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     refreshPrefs();
 }
-@interface SBMainSwitcherViewController
--(id)recentAppLayouts;
-+(id)sharedInstance;
-@end
-@interface SBAppLayout
-@property (nonatomic,copy) NSDictionary * rolesToLayoutItemsMap;
-@end
-@interface SBDisplayItem
-@property (nonatomic,copy,readonly) NSString * bundleIdentifier;
-@end
-@interface SBMediaController
-@property (nonatomic,weak,readonly) UIApplication * nowPlayingApplication; 
-+(id)sharedInstance;
-@end
-@interface UIApplication()
-@property (nonatomic,readonly) NSString * bundleIdentifier;                                                                                     //@synthesize bundleIdentifier=_bundleIdentifier - In the implementation block
-@end
-//why tf do I need this many interfaces smh
 
 %hook SBMainSwitcherViewController
 -(void)_deleteAppLayout:(id)arg1 forReason:(long long)arg2 {
