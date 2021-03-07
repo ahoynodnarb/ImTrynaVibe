@@ -1,0 +1,9 @@
+Package: com.popsicletreehouse.imtrynavibe
+Name: ImTrynaVibe
+Depends: mobilesubstrate, com.spark.libsparkapplist
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Prevent your now playing app from being cleared in the switcher
+Maintainer: PopsicleTreehouse
+Author: PopsicleTreehouse
+Section: Tweaks
