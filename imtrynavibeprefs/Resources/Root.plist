@@ -28,6 +28,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+<<<<<<< HEAD
 			<string>Blacklist</string>
 		</dict>
 		<dict>
@@ -48,6 +49,8 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+=======
+>>>>>>> 99600abbcead919f4a601e508c5e82b6928c58c3
 			<string>Credits</string>
 		</dict>
 		<dict>
