@@ -2,7 +2,7 @@
 
 static void refreshPrefs() {
 	NSDictionary *bundleDefaults = [[NSUserDefaults standardUserDefaults]persistentDomainForName:@"com.popsicletreehouse.imtrynavibeprefs"];
-	isEnabled = [[bundleDefaults objectForKey:@"isEnabled"]boolValue];
+	isEnabled = [bundleDefaults objectForKey:@"isEnabled"] ? [[bundleDefaults objectForKey:@"isEnabled"]boolValue] : YES;
 }
 static void PreferencesChangedCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
     refreshPrefs();
@@ -10,8 +10,8 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 %hook SBFluidSwitcherItemContainer
 -(void)layoutSubviews
 {
+	%orig;
 	if(isEnabled) {
-		%orig;
 		SBMediaController *mediaController = [%c(SBMediaController) sharedInstance];
 		SBApplication *nowPlayingApp = [mediaController nowPlayingApplication];
 		if(mediaController && [mediaController isPlaying]) {
@@ -20,8 +20,6 @@ static void PreferencesChangedCallback(CFNotificationCenterRef center, void *obs
 						[self setKillable: NO];
 			}
 		}
-	} else {
-		%orig;
 	}
 }
 %end
